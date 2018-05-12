@@ -1,7 +1,7 @@
 <template>
   <div class="playground-warp">
     <p>playground</p>
-    <seat :num="1"></seat>
+    <seat :num="1" :avatarUrl="userInfo.avatarUrl"></seat>
     <a href="/pages/index/main" class="home">去往首页</a>
   </div>
 </template>
@@ -12,6 +12,16 @@ import seat from '@/components/seat'
 export default {
   components: {
     seat,
+  },
+
+  data: {
+    userInfo: {},
+  },
+
+  created() {
+    this.userInfo = wx.getStorageSync('userInfo') || {}
+
+    console.log(this.userInfo)
   },
 }
 </script>

@@ -1,22 +1,29 @@
 <script>
 export default {
   created() {
-    // 调用API从本地缓存中获取数据
-    const logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    console.log('app created and cache logs by setStorageSync')
+    this.generateLogs()
+    this.getUserInfo()
   },
 
   methods: {
+    generateLogs() {
+      // 调用API从本地缓存中获取数据
+      const logs = wx.getStorageSync('logs') || []
+      logs.unshift(Date.now())
+      wx.setStorageSync('logs', logs)
+
+      console.log('app created and cache logs by setStorageSync')
+    },
+
     getUserInfo() {
       // 调用登录接口
       wx.login({
         success: () => {
           wx.getUserInfo({
             success: res => {
-              this.userInfo = res.userInfo
+              wx.setStorageSync('userInfo', res.userInfo)
+
+              console.log(res.userInfo)
             },
           })
         },

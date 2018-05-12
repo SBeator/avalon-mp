@@ -1,7 +1,7 @@
 <template>
   <div class="seat" @tap="handleViewTap">
     <p class="seat-number">{{ num + 1 }}</p>
-    <img class="seat-avatar" :src="avatarUrl"/>
+    <img class="seat-avatar" :src="avatarUrl" background-size="cover"/>
   </div>
 </template>
 <script>
