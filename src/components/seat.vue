@@ -8,18 +8,18 @@
 export default {
   props: {
     avatarUrl: {
-      type: String
+      type: String,
     },
     num: {
-      type: Number
-    }
+      type: Number,
+    },
   },
 
   methods: {
-    handleViewTap () {
+    handleViewTap() {
       this.$emit('seatDown', this.num)
-    }
-  }
+    },
+  },
 }
 </script>
 

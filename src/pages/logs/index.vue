@@ -14,19 +14,19 @@ import card from '@/components/card'
 
 export default {
   components: {
-    card
+    card,
   },
 
-  data () {
+  data() {
     return {
-      logs: []
+      logs: [],
     }
   },
 
-  created () {
-    const logs = (wx.getStorageSync('logs') || [])
+  created() {
+    const logs = wx.getStorageSync('logs') || []
     this.logs = logs.map(log => formatTime(new Date(log)))
-  }
+  },
 }
 </script>
 

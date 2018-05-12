@@ -7,15 +7,13 @@
 </template>
 
 <script>
-
 import seat from '@/components/seat'
 
 export default {
   components: {
-    seat
-  }
+    seat,
+  },
 }
-
 </script>
 <style>
 .playground-warp {
@@ -29,5 +27,4 @@ export default {
   color: blue;
   border: 1px solid blue;
 }
-
 </style>
