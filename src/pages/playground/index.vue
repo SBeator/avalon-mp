@@ -1,25 +1,34 @@
 <template>
   <div class="playground-warp">
-    <p>playground</p>
-    <seat :num="1" :avatarUrl="userInfo.avatarUrl"></seat>
+    <round-seats :seats="seatDatas" @seatDown="seatDown"></round-seats>
     <a href="/pages/index/main" class="home">去往首页</a>
   </div>
 </template>
 
 <script>
-import seat from '@/components/seat'
+import Vue from 'vue'
+import roundSeats from '@/components/roundSeats'
 
 export default {
   components: {
-    seat,
+    roundSeats,
   },
 
   data: {
     userInfo: {},
+    seatDatas: [{}, {}, {}, {}, {}, {}],
   },
 
   created() {
     this.userInfo = wx.getStorageSync('userInfo') || {}
+  },
+
+  methods: {
+    seatDown(index) {
+      Vue.set(this.seatDatas, index, {
+        avatarUrl: this.userInfo.avatarUrl,
+      })
+    },
   },
 }
 </script>
