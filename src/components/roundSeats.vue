@@ -1,7 +1,8 @@
 <template>
   <div class="roundseats">
     <div v-for="(seat, index) in seats" :key="index">
-      <div>
+      <div class="seat-position"
+        v-bind:style="{left: positions[index].left, top: positions[index].top}">
         <seat :avatarUrl="getAvatarUrl(seat)" :num="index"/>
       </div>
     </div>
@@ -21,6 +22,21 @@ export default {
     seat,
   },
 
+  computed: {
+    positions() {
+      const length = this.seats.length
+
+      const positions = new Array(length).fill().map((item, index) => {
+        const angle = 2 * Math.PI / length * index
+        return {
+          left: (((1 + Math.sin(angle)) * 0.35 + 0.05) * 100).toFixed(0) + '%',
+          top: (((1 - Math.cos(angle)) * 0.35 + 0.05) * 100).toFixed(0) + '%',
+        }
+      })
+      return positions
+    },
+  },
+
   methods: {
     getAvatarUrl(seat) {
       return seat.avatarUrl || defaultAvatar
@@ -33,8 +49,14 @@ export default {
 .roundseats {
   position: relative;
   padding: 10rpx;
-  display: flex;
-  max-width: 580rpx;
-  flex-wrap: wrap;
+  width: 100%;
+  height: 630rpx;
+}
+
+.seat-position {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 120rpx;
 }
 </style>

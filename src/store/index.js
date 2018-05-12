@@ -8,7 +8,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     userInfo: {},
-    seatDatas: [{}, {}, {}, {}, {}, {}],
+    seatDatas: [{}, {}, {}, {}, {}, {}, {}, {}, {}],
     userSeatNumber: -1
   },
   mutations: {
@@ -27,6 +27,7 @@ const store = new Vuex.Store({
         seatDatas,
         userInfo
       } = state
+
       if (previousSeat >= 0) {
         Vue.set(seatDatas, previousSeat, {})
       }
