@@ -38,6 +38,11 @@ export default {
     card,
   },
 
+  // TODO: Remove this testing navigation
+  mounted() {
+    wx.navigateTo({ url: '/pages/playground/main' })
+  },
+
   methods: {
     bindViewTap() {
       const url = '../logs/main'
