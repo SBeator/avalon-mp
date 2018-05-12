@@ -17,5 +17,11 @@ export default {}
 .title {
   margin: 200rpx 0;
   text-align: center;
+  font-size: 60rpx;
+  font-weight: bold;
+}
+
+button {
+  margin-bottom: 20rpx;
 }
 </style>
