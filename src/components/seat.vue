@@ -30,6 +30,8 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 5px;
+  width: 120rpx;
+  height: 120rpx;
 }
 
 .seat-number {
@@ -38,17 +40,17 @@ export default {
   left: 0;
   background-color: #444;
   color: #eee;
-  border-radius: 4rpx;
-  width: 30rpx;
-  height: 30rpx;
-  font-size: 20rpx;
-  line-height: 30rpx;
+  border-radius: 50%;
+  width: 50rpx;
+  height: 50rpx;
+  font-size: 35rpx;
+  line-height: 50rpx;
   text-align: center;
 }
 
 .seat-avatar {
-  width: 120rpx;
-  height: 120rpx;
+  width: 100%;
+  height: 100%;
   border-radius: 15rpx;
 }
 </style>

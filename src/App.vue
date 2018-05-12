@@ -22,8 +22,6 @@ export default {
           wx.getUserInfo({
             success: res => {
               wx.setStorageSync('userInfo', res.userInfo)
-
-              console.log(res.userInfo)
             },
           })
         },
