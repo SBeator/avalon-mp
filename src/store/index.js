@@ -8,7 +8,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     userInfo: {},
-    seatDatas: [{}, {}, {}, {}, {}, {}, {}, {}, {}],
+    seatDatas: new Array(8).fill({}),
     userSeatNumber: -1
   },
   mutations: {

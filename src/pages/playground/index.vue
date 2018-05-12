@@ -28,11 +28,11 @@ export default {
 <style>
 .playground-warp {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 100rpx;
 }
 .home {
   display: inline-block;
-  margin: 100px auto;
+  margin: 200rpx auto;
   padding: 5px 10px;
   color: blue;
   border: 1px solid blue;

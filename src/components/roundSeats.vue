@@ -50,7 +50,7 @@ export default {
   position: relative;
   padding: 10rpx;
   width: 100%;
-  height: 630rpx;
+  height: 700rpx;
 }
 
 .seat-position {
