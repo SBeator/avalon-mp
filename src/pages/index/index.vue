@@ -40,7 +40,7 @@ export default {
 
   // TODO: Remove this testing navigation
   mounted() {
-    wx.navigateTo({ url: '/pages/playground/main' })
+    wx.navigateTo({ url: '/pages/welcome/main' })
   },
 
   methods: {
