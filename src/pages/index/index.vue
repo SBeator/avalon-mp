@@ -19,7 +19,7 @@
       <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
     </form>
     <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
-    <a href="/pages/playground/main" class="counter">去往playground示例页面</a>
+    <a href="/pages/room/main" class="counter">去往playground示例页面</a>
   </div>
 </template>
 

@@ -9,13 +9,20 @@ const store = new Vuex.Store({
   state: {
     userInfo: {},
     seatDatas: new Array(8).fill({}),
-    userSeatNumber: -1
+    userSeatNumber: -1,
+    roomId: '',
   },
   mutations: {
     updateUserInfo: (state, {
       userInfo
     }) => {
       state.userInfo = userInfo
+    },
+
+    joinRoom: (state, {
+      roomId
+    }) => {
+      state.roomId = roomId
     },
 
     seatDown: (state, {
