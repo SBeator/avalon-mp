@@ -1,12 +1,12 @@
 <template>
   <div class="playground-warp">
-    <round-seats :seats="seatDatas" @seatDown="seatDown"></round-seats>
+    <round-seats :seats="seatDatas"></round-seats>
     <a href="/pages/index/main" class="home">去往首页</a>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
+import store from '@/store'
 import roundSeats from '@/components/roundSeats'
 
 export default {
@@ -14,21 +14,14 @@ export default {
     roundSeats,
   },
 
-  data: {
-    userInfo: {},
-    seatDatas: [{}, {}, {}, {}, {}, {}],
-  },
-
-  created() {
-    this.userInfo = wx.getStorageSync('userInfo') || {}
+  computed: {
+    seatDatas() {
+      return store.state.seatDatas
+    },
   },
 
   methods: {
-    seatDown(index) {
-      Vue.set(this.seatDatas, index, {
-        avatarUrl: this.userInfo.avatarUrl,
-      })
-    },
+    testing() {},
   },
 }
 </script>

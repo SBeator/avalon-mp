@@ -1,4 +1,6 @@
 <script>
+import store from '@/store'
+
 export default {
   created() {
     this.generateLogs()
@@ -22,6 +24,9 @@ export default {
           wx.getUserInfo({
             success: res => {
               wx.setStorageSync('userInfo', res.userInfo)
+              store.commit('updateUserInfo', {
+                userInfo: res.userInfo,
+              })
             },
           })
         },

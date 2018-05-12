@@ -2,7 +2,7 @@
   <div class="roundseats">
     <div v-for="(seat, index) in seats" :key="index">
       <div>
-        <seat :avatarUrl="getAvatarUrl(seat)" :num="index" @seatDown="seatDown"/>
+        <seat :avatarUrl="getAvatarUrl(seat)" :num="index"/>
       </div>
     </div>
   </div>
@@ -22,10 +22,6 @@ export default {
   },
 
   methods: {
-    seatDown(index) {
-      console.log(`${index} is tapped!`)
-      this.$emit('seatDown', index)
-    },
     getAvatarUrl(seat) {
       return seat.avatarUrl || defaultAvatar
     },

@@ -5,6 +5,8 @@
   </div>
 </template>
 <script>
+import store from '@/store'
+
 export default {
   props: {
     avatarUrl: {
@@ -18,6 +20,7 @@ export default {
   methods: {
     handleViewTap() {
       this.$emit('seatDown', this.num)
+      store.commit('seatDown', { seatNumber: this.num })
     },
   },
 }
