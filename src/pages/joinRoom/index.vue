@@ -1,7 +1,7 @@
 <template>
   <div class="joinroom-warp">
     <p class="title">请输入要加入的房间号</p>
-    <input v-model="roomId" auto-focus="" class="weui-input" placeholder="房间号" maxlength="4" />
+    <input v-model="roomId" auto-focus="" class="weui-input" placeholder="请在这输入房间号" />
     <button type="primary" @click="joinRoom()">加入房间</button>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
 }
 
 .title {
-  margin: 200rpx 0;
+  margin: 100rpx 0;
   text-align: center;
   font-size: 60rpx;
   font-weight: bold;
@@ -51,6 +51,6 @@ input {
 }
 
 button {
-  margin-top: 20rpx;
+  margin-top: 120rpx;
 }
 </style>
