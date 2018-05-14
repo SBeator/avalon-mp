@@ -5,12 +5,19 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+export const STATUS = {
+  IDLE: 'IDLE',
+}
+
 const store = new Vuex.Store({
   state: {
     userInfo: {},
     seatDatas: new Array(8).fill({}),
     userSeatNumber: -1,
     roomId: '',
+    game: {
+      status: STATUS.IDLE
+    }
   },
   mutations: {
     updateUserInfo: (state, {
