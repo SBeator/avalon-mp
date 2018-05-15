@@ -7,6 +7,8 @@ Vue.use(Vuex)
 
 export const STATUS = {
   IDLE: 'IDLE',
+  SEATED_DOWN: 'SEATED_DOWN',
+  READY: 'READY'
 }
 
 const store = new Vuex.Store({
@@ -16,8 +18,9 @@ const store = new Vuex.Store({
     userSeatNumber: -1,
     roomId: '',
     game: {
-      status: STATUS.IDLE
-    }
+      status: STATUS.IDLE,
+      host: false,
+    },
   },
   mutations: {
     updateUserInfo: (state, {
@@ -52,6 +55,12 @@ const store = new Vuex.Store({
 
       state.seatDatas = seatDatas
       state.userSeatNumber = userSeatNumber
+
+      if (seatDatas.filter(data => data.avatarUrl).length) {
+        state.game.status = STATUS.SEATED_DOWN
+      } else {
+        state.game.status = STATUS.READY
+      }
     }
   },
 })
