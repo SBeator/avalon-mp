@@ -26,6 +26,6 @@ export default {
 <style>
 .playground-warp {
   text-align: center;
-  margin-top: 100rpx;
+  margin-top: 20rpx;
 }
 </style>
