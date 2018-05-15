@@ -11,15 +11,6 @@ export const STATUS = {
   READY: 'READY'
 }
 
-export const CHARACTERS = {
-  MERLIN: 'MERLIN',
-  ASSASSIN: 'ASSASSIN',
-  PERCIVAL: 'PERCIVAL',
-  MORGANA: 'MORGANA',
-  MORDRED: 'MORDRED',
-  OBERON: 'OBERON',
-}
-
 const store = new Vuex.Store({
   state: {
     userInfo: {},
@@ -32,12 +23,12 @@ const store = new Vuex.Store({
     },
     gameType: {
       playerNumber: 7,
-      characters: [
-        CHARACTERS.MERLIN,
-        CHARACTERS.ASSASSIN,
-        CHARACTERS.MORGANA,
-        CHARACTERS.PERCIVAL,
-      ]
+      hasMerlin: true,
+      hasAssassin: true,
+      hasPercival: true,
+      hasMorgana: true,
+      hasMordred: false,
+      hasOberon: false,
     }
   },
   mutations: {
@@ -45,6 +36,15 @@ const store = new Vuex.Store({
       userInfo
     }) => {
       state.userInfo = userInfo
+    },
+
+    changeGameType: (state, {
+      gameType
+    }) => {
+      state.gameType = {
+        ...state.gameType,
+        ...gameType
+      }
     },
 
     joinRoom: (state, {
