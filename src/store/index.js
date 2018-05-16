@@ -32,6 +32,12 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    test: (state, {
+      count
+    }) => {
+      console.log('test', count)
+    },
+
     updateUserInfo: (state, {
       userInfo
     }) => {

@@ -1,10 +1,12 @@
 <script>
 import store from '@/store'
+import socket from '@/socket'
 
 export default {
   created() {
     this.generateLogs()
     this.getUserInfo()
+    socket()
   },
 
   methods: {
