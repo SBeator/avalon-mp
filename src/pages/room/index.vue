@@ -1,5 +1,6 @@
 <template>
   <div class="playground-warp">
+    <p>{{ roomId }}</p>
     <message></message>
     <round-seats :seats="seatDatas"></round-seats>
   </div>
@@ -19,6 +20,10 @@ export default {
   computed: {
     seatDatas() {
       return store.state.seatDatas
+    },
+
+    roomId() {
+      return store.state.roomId
     },
   },
 }

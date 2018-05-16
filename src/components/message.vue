@@ -22,9 +22,9 @@ const hostUserGameMessageMap = {
 export default {
   created() {
     if (store.state.game.host) {
-      hostUserGameMessageMap.keys().array.forEach(key => {
+      for (let key in hostUserGameMessageMap) {
         gameMessageMap[key] = hostUserGameMessageMap[key]
-      })
+      }
     }
   },
 

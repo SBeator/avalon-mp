@@ -16,8 +16,7 @@ export default {
 
   methods: {
     joinRoom() {
-      store.commit('joinRoom', this.roomId)
-      wx.navigateTo({ url: '/pages/room/main' })
+      store.commit('joinRoom', { roomId: this.roomId })
     },
   },
 }

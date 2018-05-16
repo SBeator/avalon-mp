@@ -10,6 +10,8 @@
     <label-switch :checked="gameType.hasMorgana" name="hasMorgana" @change="changeGameType" label="莫甘娜"></label-switch>
     <label-switch :checked="gameType.hasMordred" name="hasMordred" @change="changeGameType" label="莫德雷德"></label-switch>
     <label-switch :checked="gameType.hasOberon" name="hasOberon" @change="changeGameType" label="奥伯伦"></label-switch>
+
+    <button type="primary" @click="createRoom()">创建房间</button>
   </div>
 </template>
 
@@ -43,6 +45,10 @@ export default {
         },
       })
     },
+
+    createRoom() {
+      store.commit('createRoom')
+    },
   },
 }
 </script>
@@ -59,6 +65,6 @@ export default {
 }
 
 button {
-  margin-bottom: 20rpx;
+  margin-top: 200rpx;
 }
 </style>

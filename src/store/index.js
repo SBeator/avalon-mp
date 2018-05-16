@@ -47,10 +47,26 @@ const store = new Vuex.Store({
       }
     },
 
+    createRoom: (state) => {
+      state.seatDatas = new Array(state.gameType.playerNumber).fill({})
+      state.game = {
+        status: STATUS.IDLE,
+        host: true,
+      }
+      state.roomId = Math.floor(1000 + Math.random() * 9000) + ''
+
+      wx.navigateTo({
+        url: '/pages/room/main'
+      })
+    },
+
     joinRoom: (state, {
       roomId
     }) => {
       state.roomId = roomId
+      wx.navigateTo({
+        url: '/pages/room/main'
+      })
     },
 
     seatDown: (state, {
