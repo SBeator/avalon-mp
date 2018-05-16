@@ -15,21 +15,21 @@ const socket = {
   emit(eventName, ...datas) {}
 }
 
+const server = {
+  emit(event, data) {
+    const handlers = bindedEvents[event]
+    if (handlers) {
+      handlers.forEach(handler => {
+        handler(data)
+      })
+    }
+  }
+}
+
 const io = {
   connect() {
-    let count = 0
-    setInterval(() => {
-      console.log('fire test event', count)
-      const handlers = bindedEvents['test']
-      if (handlers) {
-        handlers.forEach(handler => {
-          handler({
-            count
-          })
-        })
-        count++
-      }
-    }, 1000)
+    global.window.emit = server.emit
+
     return socket
   },
 }

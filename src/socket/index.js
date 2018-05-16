@@ -2,7 +2,8 @@ import io from './mockServer'
 import store from '@/store'
 
 const events = [
-  'test'
+  'test',
+  'seatDown'
 ]
 
 export default () => {
