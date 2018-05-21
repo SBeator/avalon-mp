@@ -11,6 +11,15 @@ export const STATUS = {
   READY: 'READY'
 }
 
+export const ROLES = {
+  MERLIN: '梅林',
+  ASSASSIN: '刺客',
+  PERCIVAL: '派西维尔',
+  MORGANA: '莫甘娜',
+  MORDRED: '莫德雷德',
+  OBERON: '奥伯伦',
+}
+
 const store = new Vuex.Store({
   state: {
     userInfo: {},
@@ -21,6 +30,11 @@ const store = new Vuex.Store({
       status: STATUS.IDLE,
       host: false,
     },
+    role: {
+      name: '',
+      message: '',
+      otherUsers: []
+    },
     gameType: {
       playerNumber: 7,
       hasMerlin: true,
@@ -29,6 +43,11 @@ const store = new Vuex.Store({
       hasMorgana: true,
       hasMordred: false,
       hasOberon: false,
+    }
+  },
+  getters: {
+    readyStart: state => {
+      return state.game.host && state.game.status === 'READY'
     }
   },
   mutations: {
@@ -91,7 +110,7 @@ const store = new Vuex.Store({
         seatDatas
       } = state
 
-      if (seatDatas[userSeatNumber].avatarUrl) {
+      if (seatDatas[userSeatNumber] && seatDatas[userSeatNumber].avatarUrl) {
         return
       }
 
@@ -118,8 +137,29 @@ const store = new Vuex.Store({
       } else {
         state.game.status = STATUS.READY
       }
+    },
+
+    setRole(state, {
+      role
+    }) {
+      state.role = role
     }
   },
+
+  actions: {
+    startGame: ({
+      commit,
+      state
+    }) => {
+      commit('setRole', {
+        role: {
+          name: ROLES.MERLIN,
+          message: '其他的反派角色是',
+          otherUsers: [2, 3]
+        }
+      })
+    }
+  }
 })
 
 export default store

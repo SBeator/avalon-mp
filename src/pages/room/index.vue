@@ -3,6 +3,7 @@
     <p>{{ roomId }}</p>
     <message></message>
     <round-seats :seats="seatDatas"></round-seats>
+    <button v-show="readyStart" type="primary" @click="startGame()">开始游戏</button>
   </div>
 </template>
 
@@ -25,12 +26,22 @@ export default {
     roomId() {
       return store.state.roomId
     },
+
+    readyStart() {
+      return store.getters.readyStart
+    }
   },
+
+  methods: {
+    startGame() {
+      store.dispatch('startGame')
+    }
+  }
 }
 </script>
 <style>
 .playground-warp {
   text-align: center;
-  margin-top: 20rpx;
+  padding: 20rpx
 }
 </style>

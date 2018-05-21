@@ -6,10 +6,12 @@
         <seat :avatarUrl="getAvatarUrl(seat)" :num="index"/>
       </div>
     </div>
+    <button v-show="showShowRoleButton" class="showRole" type="primary" @click="showRole()">查看身份</button>
   </div>
 </template>
 
 <script>
+import store from '@/store'
 import seat from './seat'
 import defaultAvatar from '@/../static/default-avatar.png'
 
@@ -35,6 +37,10 @@ export default {
       })
       return positions
     },
+
+    showShowRoleButton() {
+      return store.state.role.name
+    }
   },
 
   methods: {
@@ -58,5 +64,13 @@ export default {
   left: 0;
   right: 0;
   width: 120rpx;
+}
+
+.showRole {
+  position: absolute;
+  left:50%;
+  top:50%;
+  margin-top:-50rpx;
+  margin-left:-120rpx;
 }
 </style>
