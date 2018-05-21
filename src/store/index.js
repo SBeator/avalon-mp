@@ -75,18 +75,36 @@ const store = new Vuex.Store({
       })
     },
 
-    seatDown: (state, {
+    leaveSeat: (state, {
       seatNumber
     }) => {
+      Vue.set(state.seatDatas, seatNumber, {})
+    },
+
+    seatDown: function (state, {
+      seatNumber,
+      userInfo
+    }) {
       const userSeatNumber = seatNumber
       const {
         userSeatNumber: previousSeat,
-        seatDatas,
-        userInfo
+        seatDatas
       } = state
 
-      if (previousSeat >= 0) {
-        Vue.set(seatDatas, previousSeat, {})
+      if (seatDatas[userSeatNumber].avatarUrl) {
+        return
+      }
+
+      if (!userInfo) {
+        userInfo = state.userInfo
+
+        if (previousSeat >= 0) {
+          this.commit('leaveSeat', {
+            seatNumber: previousSeat
+          })
+        }
+
+        state.userSeatNumber = userSeatNumber
       }
 
       Vue.set(seatDatas, userSeatNumber, {
@@ -94,9 +112,8 @@ const store = new Vuex.Store({
       })
 
       state.seatDatas = seatDatas
-      state.userSeatNumber = userSeatNumber
 
-      if (seatDatas.filter(data => data.avatarUrl).length) {
+      if (seatDatas.filter(data => !data.avatarUrl).length) {
         state.game.status = STATUS.SEATED_DOWN
       } else {
         state.game.status = STATUS.READY
