@@ -1,6 +1,7 @@
-# first-night-judge-of-we-are-wolves
+# 阿瓦隆桌游助手
 
-> A Mpvue project
+> 一个基于Mpvue创建的“阿瓦隆桌游助手”
+> 正在开发中……
 
 ## Build Setup
 
