@@ -28,10 +28,7 @@ const server = {
 
 const io = {
   connect() {
-    // setTimeout(function () {
     global.window.emit = server.emit
-    // }, 1000)
-
     return socket
   },
 }
