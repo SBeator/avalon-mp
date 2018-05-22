@@ -18,6 +18,13 @@ export const ROLES = {
   MORGANA: '莫甘娜',
   MORDRED: '莫德雷德',
   OBERON: '奥伯伦',
+  GOODGUY: '亚瑟忠臣',
+  BADGUY: '爪牙'
+}
+
+export const SIDE = {
+  GOOD: 'GOOD',
+  BAD: 'BAD',
 }
 
 const store = new Vuex.Store({
@@ -154,6 +161,7 @@ const store = new Vuex.Store({
       commit('setRole', {
         role: {
           name: ROLES.MERLIN,
+          side: SIDE.GOOD,
           message: '其他的反派角色是',
           otherUsers: [2, 3]
         }
