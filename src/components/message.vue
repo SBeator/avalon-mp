@@ -13,6 +13,7 @@ const gameMessageMap = {
   [STATUS.IDLE]: '请点击座位坐下',
   [STATUS.SEATED_DOWN]: '请等待其他玩家坐下',
   [STATUS.READY]: '请等待主机玩家开始游戏',
+  [STATUS.STARTED]: '点击“查看身份”查看自己身份信息',
 }
 
 const hostUserGameMessageMap = {

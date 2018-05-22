@@ -7,12 +7,14 @@
       </div>
     </div>
     <button v-show="showShowRoleButton" class="showRole" type="primary" @click="showRole()">查看身份</button>
+    <roleInfo :show="showRoleInfo" @hide="hideRoleInfo"></roleInfo>
   </div>
 </template>
 
 <script>
 import store from '@/store'
 import seat from './seat'
+import roleInfo from './roleInfo'
 import defaultAvatar from '@/../static/default-avatar.png'
 
 export default {
@@ -20,8 +22,15 @@ export default {
     seats: [],
   },
 
+  data() {
+    return {
+      showRoleInfo: false,
+    }
+  },
+
   components: {
     seat,
+    roleInfo,
   },
 
   computed: {
@@ -40,12 +49,20 @@ export default {
 
     showShowRoleButton() {
       return store.state.role.name
-    }
+    },
   },
 
   methods: {
     getAvatarUrl(seat) {
       return seat.avatarUrl || defaultAvatar
+    },
+
+    showRole() {
+      this.showRoleInfo = true
+    },
+
+    hideRoleInfo() {
+      this.showRoleInfo = false
     },
   },
 }
@@ -68,9 +85,9 @@ export default {
 
 .showRole {
   position: absolute;
-  left:50%;
-  top:50%;
-  margin-top:-50rpx;
-  margin-left:-120rpx;
+  left: 50%;
+  top: 50%;
+  margin-top: -50rpx;
+  margin-left: -120rpx;
 }
 </style>

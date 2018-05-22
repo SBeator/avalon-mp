@@ -8,7 +8,8 @@ Vue.use(Vuex)
 export const STATUS = {
   IDLE: 'IDLE',
   SEATED_DOWN: 'SEATED_DOWN',
-  READY: 'READY'
+  READY: 'READY',
+  STARTED: 'STARTED'
 }
 
 export const ROLES = {
@@ -150,6 +151,10 @@ const store = new Vuex.Store({
       role
     }) {
       state.role = role
+    },
+
+    startGame(state) {
+      state.game.status = STATUS.STARTED
     }
   },
 
@@ -158,10 +163,13 @@ const store = new Vuex.Store({
       commit,
       state
     }) => {
+      commit('startGame')
+
+      // TODO: change this to real call
       commit('setRole', {
         role: {
           name: ROLES.MERLIN,
-          side: SIDE.GOOD,
+          side: SIDE.BAD,
           message: '其他的反派角色是',
           otherUsers: [2, 3]
         }
