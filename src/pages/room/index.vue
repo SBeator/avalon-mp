@@ -1,6 +1,6 @@
 <template>
   <div class="playground-warp">
-    <p>{{ roomId }}</p>
+    <p class="roomId">房间号： {{ roomId }}</p>
     <message></message>
     <round-seats :seats="seatDatas"></round-seats>
     <button v-show="readyStart" type="primary" @click="startGame()">开始游戏</button>
@@ -29,19 +29,23 @@ export default {
 
     readyStart() {
       return store.getters.readyStart
-    }
+    },
   },
 
   methods: {
     startGame() {
       store.dispatch('startGame')
-    }
-  }
+    },
+  },
 }
 </script>
 <style>
 .playground-warp {
   text-align: center;
-  padding: 20rpx
+  padding: 20rpx;
+}
+
+.roomId {
+  text-align: right;
 }
 </style>

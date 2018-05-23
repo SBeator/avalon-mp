@@ -38,7 +38,8 @@ export default {
 </script>
 
 <style>
-.card {
-  padding: 10px;
+.message {
+  font-size: 40rpx;
+  margin-top: 30rpx;
 }
 </style>

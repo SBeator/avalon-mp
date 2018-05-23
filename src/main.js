@@ -15,7 +15,7 @@ export default {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
+      navigationBarTitleText: '阿瓦隆桌游助手',
       navigationBarTextStyle: 'black'
     }
   }

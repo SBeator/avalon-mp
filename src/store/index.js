@@ -169,7 +169,7 @@ const store = new Vuex.Store({
       commit('setRole', {
         role: {
           name: ROLES.MERLIN,
-          side: SIDE.BAD,
+          side: SIDE.GOOD,
           message: '其他的反派角色是',
           otherUsers: [2, 3]
         }
