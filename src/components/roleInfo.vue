@@ -62,6 +62,11 @@ export default {
   border-radius: 40rpx;
 }
 
+.roleName b {
+  margin: 30rpx;
+  font-size: 80rpx;
+}
+
 .GOOD {
   color: green;
 }
