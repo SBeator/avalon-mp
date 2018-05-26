@@ -6,36 +6,44 @@
 //   'seatDown'
 // ]
 
-let socketTask = null
-let isOpen = false
+// let socketTask = null
+// let isOpen = false
+
+const connectSocket = (store) => {
+  wx.connectSocket({
+    url: 'wss://localhost:8777'
+  })
+
+  wx.onSocketOpen(() => {
+    console.log('Socket connected!')
+
+    wx.onSocketMessage((res) => {
+      console.log('收到服务器内容：' + res.data)
+      const data = JSON.parse(res.data)
+      store.commit(data.type, data.payload)
+    })
+  })
+
+  wx.onSocketError((error) => {
+    console.log('Connect socket failed, reason:')
+    console.log(error)
+    console.log('Will re-connect in 1 second')
+    connectSocket(store)
+  })
+}
 
 const initSocket = (store) => {
-  if (!socketTask) {
-    socketTask = wx.connectSocket({
-      url: 'wss://localhost:8777',
-    })
+  connectSocket(store)
 
-    socketTask.onOpen(() => {
-      console.log('Socket connected!')
-      isOpen = true
-
-      socketTask.onMessage((res) => {
-        console.log('收到服务器内容：' + res.data)
-        const data = JSON.parse(res.data)
-        store.commit(data.type, data.payload)
-      })
-    })
-  }
-
-  return socketTask
+  wx.onSocketClose(() => {
+    console.log('socket is closed, will re-connect in 1 second')
+    connectSocket(store)
+  })
 }
 
 export default {
   sendData: (data) => {
-    if (!isOpen) {
-      console.error('Socket is not open!')
-    }
-    socketTask.send({
+    wx.sendSocketMessage({
       data: JSON.stringify(data),
       success: function () {
         console.log('Sent this data:')
@@ -45,14 +53,9 @@ export default {
       fail: function (error) {
         console.log('Sent this data:')
         console.log(data)
-        console.log(`Failed!, error: ${error}`)
+        console.log('Failed!, error:')
+        console.log(error)
       }
-    })
-  },
-
-  onMessage: (callback) => {
-    socketTask.onMessage((res) => {
-      callback(res)
     })
   }
 }
