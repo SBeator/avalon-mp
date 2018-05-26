@@ -2,10 +2,12 @@
 // make sure to call Vue.use(Vuex) if using a module system
 import Vue from 'vue'
 import Vuex from 'vuex'
+import socket from '@/socket'
 
 Vue.use(Vuex)
 
 export const STATUS = {
+  CREATING_ROOM: 'CREATING_ROOM',
   IDLE: 'IDLE',
   SEATED_DOWN: 'SEATED_DOWN',
   READY: 'READY',
@@ -80,13 +82,22 @@ const store = new Vuex.Store({
       }
     },
 
-    createRoom: (state) => {
-      state.seatDatas = new Array(state.gameType.playerNumber).fill({})
+    creatingRoom: (state) => {
+      state.game.status = STATUS.CREATING_ROOM
+    },
+
+    createRoom: (state, {
+      roomId,
+      gameType
+    }) => {
+      state.gameType = gameType
+      state.roomId = roomId
+
+      state.seatDatas = new Array(gameType.playerNumber).fill({})
       state.game = {
         status: STATUS.IDLE,
         host: true,
       }
-      state.roomId = Math.floor(1000 + Math.random() * 9000) + ''
 
       wx.navigateTo({
         url: '/pages/room/main'
@@ -173,6 +184,18 @@ const store = new Vuex.Store({
           message: '其他的反派角色是',
           otherUsers: [2, 3]
         }
+      })
+    },
+
+    createRoom: ({
+      commit,
+      state
+    }) => {
+      commit('creatingRoom')
+
+      socket.sendData({
+        type: 'createRoom',
+        state
       })
     }
   }

@@ -1,22 +1,24 @@
-var path = require('path')
-var fs = require('fs')
+const path = require('path')
+const fs = require('fs')
+
+const room = require('./room')
 
 // you'll probably load configuration from config
-var cfg = {
+const cfg = {
   ssl: true,
   port: 8777,
   ssl_key: path.join(__dirname, './ssl.key'),
   ssl_cert: path.join(__dirname, './ssl.crt')
 }
 
-var httpServ = (cfg.ssl) ? require('https') : require('http')
+const httpServ = (cfg.ssl) ? require('https') : require('http')
 
-var WebSocketServer = require('ws').Server
+const WebSocketServer = require('ws').Server
 
-var app = null
+let app = null
 
 // dummy request processing
-var processRequest = (req, res) => {
+const processRequest = (req, res) => {
   res.writeHead(200)
   res.end('All glory to WebSockets!\n')
 }
@@ -32,15 +34,25 @@ if (cfg.ssl) {
 }
 
 // passing or reference to web server so WS would knew port and SSL capabilities
-var wss = new WebSocketServer({
+const wss = new WebSocketServer({
   server: app
 })
 
-wss.on('connection', function (wsConnect) {
+wss.on('connection', function (client) {
   console.log('connected')
 
-  wsConnect.on('message', function (message) {
-    console.log(message)
-    wsConnect.send(message)
+  const sendData = (data) => {
+    const message = JSON.stringify(data)
+    console.log(`Send message: \n${message}`)
+    client.send(message)
+  }
+
+  client.on('message', function (message) {
+    console.log(`Recieved message: \n${message}`)
+    // client.send(message)
+    room({
+      sendData,
+      data: JSON.parse(message)
+    })
   })
 })

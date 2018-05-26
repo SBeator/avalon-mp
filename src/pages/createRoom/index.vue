@@ -47,7 +47,7 @@ export default {
     },
 
     createRoom() {
-      store.commit('createRoom')
+      store.dispatch('createRoom')
     },
   },
 }
