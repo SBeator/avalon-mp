@@ -11,12 +11,12 @@
     <label-switch :checked="gameType.hasMordred" name="hasMordred" @change="changeGameType" label="莫德雷德"></label-switch>
     <label-switch :checked="gameType.hasOberon" name="hasOberon" @change="changeGameType" label="奥伯伦"></label-switch>
 
-    <button type="primary" @click="createRoom()">创建房间</button>
+    <button type="primary" :loading="creating" @click="createRoom()">创建房间</button>
   </div>
 </template>
 
 <script>
-import store from '@/store'
+import store, { STATUS } from '@/store'
 import labelSwitch from '@/Components/labelSwitch'
 
 export default {
@@ -27,6 +27,9 @@ export default {
   computed: {
     gameType() {
       return store.state.gameType
+    },
+    creating() {
+      return store.state.game.status === STATUS.CREATING_ROOM
     },
   },
 

@@ -88,10 +88,12 @@ const store = new Vuex.Store({
 
     createRoom: (state, {
       roomId,
-      gameType
+      gameType,
+      host
     }) => {
       state.gameType = gameType
       state.roomId = roomId
+      state.host = host
 
       state.seatDatas = new Array(gameType.playerNumber).fill({})
       state.game = {
