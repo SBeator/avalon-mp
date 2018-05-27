@@ -16,7 +16,7 @@ export default {
 
   methods: {
     joinRoom() {
-      store.commit('joinRoom', { roomId: this.roomId })
+      store.dispatch('joinRoom', { roomId: this.roomId })
     },
   },
 }

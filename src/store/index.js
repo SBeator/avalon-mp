@@ -7,7 +7,7 @@ import socket from '@/socket'
 Vue.use(Vuex)
 
 export const STATUS = {
-  CREATING_ROOM: 'CREATING_ROOM',
+  LOADING: 'LOADING',
   IDLE: 'IDLE',
   SEATED_DOWN: 'SEATED_DOWN',
   READY: 'READY',
@@ -82,23 +82,23 @@ const store = new Vuex.Store({
       }
     },
 
-    creatingRoom: (state) => {
-      state.game.status = STATUS.CREATING_ROOM
+    loading: (state) => {
+      state.game.status = STATUS.LOADING
     },
 
     createRoom: (state, {
       roomId,
       gameType,
+      seatDatas,
       host
     }) => {
       state.gameType = gameType
       state.roomId = roomId
-      state.host = host
+      state.seatDatas = seatDatas
 
-      state.seatDatas = new Array(gameType.playerNumber).fill({})
       state.game = {
         status: STATUS.IDLE,
-        host: true,
+        host,
       }
 
       wx.navigateTo({
@@ -107,9 +107,20 @@ const store = new Vuex.Store({
     },
 
     joinRoom: (state, {
-      roomId
+      roomId,
+      gameType,
+      seatDatas,
+      host
     }) => {
+      state.gameType = gameType
       state.roomId = roomId
+      state.seatDatas = seatDatas
+
+      state.game = {
+        status: STATUS.IDLE,
+        host: host,
+      }
+
       wx.navigateTo({
         url: '/pages/room/main'
       })
@@ -193,11 +204,28 @@ const store = new Vuex.Store({
       commit,
       state
     }) => {
-      commit('creatingRoom')
+      commit('loading')
 
       socket.sendData({
         type: 'createRoom',
         state
+      })
+    },
+
+    joinRoom: ({
+      commit,
+      state
+    }, {
+      roomId
+    }) => {
+      commit('loading')
+
+      socket.sendData({
+        type: 'joinRoom',
+        state: {
+          ...state,
+          roomId
+        }
       })
     }
   }

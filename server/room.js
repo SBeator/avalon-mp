@@ -1,18 +1,49 @@
+var dbData = require('./data')
+
 const room = ({
   data,
   sendData
 }) => {
+  let gameType, roomId, room
   switch (data.type) {
     case 'createRoom':
-      const gameType = data.state.gameType
+      gameType = data.state.gameType
+      const newRoomId = dbData.generateNewRoomId()
+
+      room = dbData.createRoom({
+        id: newRoomId,
+        gameType
+      })
       sendData({
         type: 'createRoom',
         payload: {
-          roomId: Math.floor(1000 + Math.random() * 9000) + '',
+          ...room,
           host: true,
-          gameType
         }
       })
+      break
+    case 'joinRoom':
+      roomId = data.state.roomId
+      room = dbData.findRoom({
+        roomId
+      })
+
+      if (room) {
+        // data.joinRoom({
+        //   roomId
+        // })
+        sendData({
+          type: 'joinRoom',
+          payload: {
+            ...room,
+            host: false,
+          }
+        })
+      } else {
+        // Handle error
+        console.error(`room ${roomId} doesn't exists`)
+      }
+
       break
     default:
       break

@@ -29,7 +29,7 @@ export default {
       return store.state.gameType
     },
     creating() {
-      return store.state.game.status === STATUS.CREATING_ROOM
+      return store.state.game.status === STATUS.LOADING
     },
   },
 
