@@ -2,16 +2,22 @@
   <div class="joinroom-warp">
     <p class="title">请输入要加入的房间号</p>
     <input v-model="roomId" auto-focus="" class="weui-input" placeholder="请在这输入房间号" />
-    <button type="primary" @click="joinRoom()">加入房间</button>
+    <button type="primary" :loading="joining" @click="joinRoom()">加入房间</button>
   </div>
 </template>
 
 <script>
-import store from '@/store'
+import store, { STATUS } from '@/store'
 
 export default {
   data: {
     roomId: '',
+  },
+
+  computed: {
+    joining() {
+      return store.state.game.status === STATUS.LOADING
+    },
   },
 
   methods: {
