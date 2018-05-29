@@ -1,3 +1,13 @@
+const mockSeats = new Array(9).fill({})
+mockSeats[3] = {
+  avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIeUlHUuMJguQsZF3933j16D7IToLt3dnhS8gyliaPVpfMfCmJeXbZVPr7OUofQS9uNPKrkBLW8Zrg/132',
+  city: 'Chengdu',
+  country: 'China',
+  gender: 1,
+  language: 'zh_CN',
+  nickName: '啦啦啦',
+}
+
 const data = {
   rooms: [{
     roomId: '1234',
@@ -10,8 +20,15 @@ const data = {
       hasMordred: false,
       hasOberon: false,
     },
-    seatDatas: new Array(9).fill({}),
-    users: [],
+    seatDatas: mockSeats,
+    users: [{
+      avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIeUlHUuMJguQsZF3933j16D7IToLt3dnhS8gyliaPVpfMfCmJeXbZVPr7OUofQS9uNPKrkBLW8Zrg/132',
+      city: 'Chengdu',
+      country: 'China',
+      gender: 1,
+      language: 'zh_CN',
+      nickName: '啦啦啦',
+    }],
   }, {
     roomId: '1111',
     gameType: {
@@ -42,9 +59,12 @@ const data = {
       roomId,
       gameType,
       seatDatas: new Array(gameType.playerNumber).fill({}),
+      users: []
     }
 
     this.rooms.push(newRoom)
+
+    return newRoom
   },
 
   findRoom({

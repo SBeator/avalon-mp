@@ -86,26 +86,6 @@ const store = new Vuex.Store({
       state.game.status = STATUS.LOADING
     },
 
-    createRoom: (state, {
-      roomId,
-      gameType,
-      seatDatas,
-      host
-    }) => {
-      state.gameType = gameType
-      state.roomId = roomId
-      state.seatDatas = seatDatas
-
-      state.game = {
-        status: STATUS.IDLE,
-        host,
-      }
-
-      wx.navigateTo({
-        url: '/pages/room/main'
-      })
-    },
-
     joinRoom: (state, {
       roomId,
       gameType,

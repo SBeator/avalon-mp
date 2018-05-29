@@ -1,10 +1,30 @@
 var dbData = require('./data')
 
+function joinRoom({
+  room,
+  userInfo,
+  host,
+  sendData
+}) {
+  dbData.joinRoom({
+    roomId: room.roomId,
+    userInfo: userInfo
+  })
+  sendData({
+    type: 'joinRoom',
+    payload: {
+      ...room,
+      host,
+    }
+  })
+}
+
 const room = ({
   data,
   sendData
 }) => {
   let gameType, roomId, room
+  const userInfo = data.state.userInfo
   switch (data.type) {
     case 'createRoom':
       gameType = data.state.gameType
@@ -14,16 +34,12 @@ const room = ({
         id: newRoomId,
         gameType
       })
-      dbData.joinRoom({
-        roomId,
-        userInfo: data.state.userInfo
-      })
-      sendData({
-        type: 'createRoom',
-        payload: {
-          ...room,
-          host: true,
-        }
+
+      joinRoom({
+        room,
+        userInfo,
+        host: true,
+        sendData
       })
       break
     case 'joinRoom':
@@ -33,16 +49,11 @@ const room = ({
       })
 
       if (room) {
-        dbData.joinRoom({
-          roomId,
-          userInfo: data.state.userInfo
-        })
-        sendData({
-          type: 'joinRoom',
-          payload: {
-            ...room,
-            host: false,
-          }
+        joinRoom({
+          room,
+          userInfo,
+          host: false,
+          sendData
         })
       } else {
         // Handle error
