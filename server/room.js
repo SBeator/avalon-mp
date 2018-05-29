@@ -14,6 +14,10 @@ const room = ({
         id: newRoomId,
         gameType
       })
+      dbData.joinRoom({
+        roomId,
+        userInfo: data.state.userInfo
+      })
       sendData({
         type: 'createRoom',
         payload: {
@@ -29,9 +33,10 @@ const room = ({
       })
 
       if (room) {
-        // data.joinRoom({
-        //   roomId
-        // })
+        dbData.joinRoom({
+          roomId,
+          userInfo: data.state.userInfo
+        })
         sendData({
           type: 'joinRoom',
           payload: {

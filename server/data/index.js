@@ -11,7 +11,27 @@ const data = {
       hasOberon: false,
     },
     seatDatas: new Array(9).fill({}),
-
+    users: [],
+  }, {
+    roomId: '1111',
+    gameType: {
+      playerNumber: 9,
+      hasMerlin: true,
+      hasAssassin: true,
+      hasPercival: true,
+      hasMorgana: true,
+      hasMordred: false,
+      hasOberon: false,
+    },
+    seatDatas: new Array(9).fill({}),
+    users: [{
+      avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIeUlHUuMJguQsZF3933j16D7IToLt3dnhS8gyliaPVpfMfCmJeXbZVPr7OUofQS9uNPKrkBLW8Zrg/132',
+      city: 'Chengdu',
+      country: 'China',
+      gender: 1,
+      language: 'zh_CN',
+      nickName: '星星',
+    }]
   }],
 
   createRoom({
@@ -40,9 +60,46 @@ const data = {
   },
 
   joinRoom({
-    roomId
+    roomId,
+    userInfo
   }) {
-    // TODO: Add User in the room
+    this.rooms.forEach(room => {
+      if (room.users.filter(user => user.nickName === userInfo.nickName && user.avatarUrl === userInfo.avatarUrl).length) {
+        this.leaveRoom({
+          roomId: room.roomId,
+          userInfo
+        })
+      }
+    })
+
+    const room = this.findRoom({
+      roomId
+    })
+
+    if (room) {
+      room.users.push(userInfo)
+    }
+  },
+
+  leaveRoom({
+    roomId,
+    userInfo
+  }) {
+    const room = this.findRoom({
+      roomId
+    })
+
+    if (room) {
+      room.users = room.users.reduce((previousUsers, user) => {
+        if (user.nickName !== userInfo.nickName || user.avatarUrl !== userInfo.avatarUrl) {
+          previousUsers.push(user)
+        }
+
+        return previousUsers
+      }, [])
+    }
+
+    // TODO: Do more thing after user is leave(E.g: remove user from seat...)
   },
 
   generateNewRoomId: function () {
