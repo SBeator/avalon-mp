@@ -101,7 +101,10 @@ const data = {
     })
 
     if (room) {
-      room.users.push(userInfo)
+      room.users.push({
+        ...userInfo,
+        sendData
+      })
     }
   },
 

@@ -62,8 +62,6 @@ const room = ({
           host: false,
           sendData
         })
-
-        // TODO: Send join room event to all users
       } else {
         const errorMessage = `room ${roomId} doesn't exists`
         console.error(errorMessage)
