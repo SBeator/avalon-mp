@@ -56,8 +56,15 @@ const room = ({
           sendData
         })
       } else {
-        // Handle error
-        console.error(`room ${roomId} doesn't exists`)
+        const errorMessage = `room ${roomId} doesn't exists`
+        console.error(errorMessage)
+
+        sendData({
+          type: 'error',
+          payload: {
+            message: errorMessage
+          }
+        })
       }
 
       break

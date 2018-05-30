@@ -86,6 +86,18 @@ const store = new Vuex.Store({
       state.game.status = STATUS.LOADING
     },
 
+    error: (state, {
+      message
+    }) => {
+      state.game.status = STATUS.IDLE
+
+      wx.showToast({
+        title: message,
+        icon: 'none',
+        duration: 2000
+      })
+    },
+
     joinRoom: (state, {
       roomId,
       gameType,
