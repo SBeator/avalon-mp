@@ -68,6 +68,29 @@ const room = ({
       }
 
       break
+    case 'startGame':
+      roomId = data.state.roomId
+      room = dbData.findRoom({
+        roomId
+      })
+      if (room) {
+        if (room.seatDatas.filter(seatData => !seatData.nickName).length) {
+          sendData({
+            type: 'error',
+            payload: {
+              message: '有空座位没有人坐下'
+            }
+          })
+        }
+      } else {
+        sendData({
+          type: 'error',
+          payload: {
+            message: '房间号不存在……'
+          }
+        })
+      }
+      break
     default:
       break
   }

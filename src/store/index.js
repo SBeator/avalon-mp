@@ -38,6 +38,7 @@ const store = new Vuex.Store({
     roomId: '',
     game: {
       status: STATUS.IDLE,
+      previousGameStatus: '',
       host: false,
     },
     role: {
@@ -53,7 +54,7 @@ const store = new Vuex.Store({
       hasMorgana: true,
       hasMordred: false,
       hasOberon: false,
-    }
+    },
   },
   getters: {
     readyStart: state => {
@@ -83,13 +84,14 @@ const store = new Vuex.Store({
     },
 
     loading: (state) => {
+      state.game.previousGameStatus = state.game.status
       state.game.status = STATUS.LOADING
     },
 
     error: (state, {
       message
     }) => {
-      state.game.status = STATUS.IDLE
+      state.game.status = state.game.previousGameStatus ? state.game.previousGameStatus : STATUS.IDLE
 
       wx.showToast({
         title: message,
@@ -179,17 +181,22 @@ const store = new Vuex.Store({
       commit,
       state
     }) => {
-      commit('startGame')
+      commit('loading')
 
-      // TODO: change this to real call
-      commit('setRole', {
-        role: {
-          name: ROLES.MERLIN,
-          side: SIDE.GOOD,
-          message: '其他的反派角色是',
-          otherUsers: [2, 3]
-        }
+      socket.sendData({
+        type: 'startGame',
+        state
       })
+
+      // // TODO: change this to real call
+      // commit('setRole', {
+      //   role: {
+      //     name: ROLES.MERLIN,
+      //     side: SIDE.GOOD,
+      //     message: '其他的反派角色是',
+      //     otherUsers: [2, 3]
+      //   }
+      // })
     },
 
     createRoom: ({
