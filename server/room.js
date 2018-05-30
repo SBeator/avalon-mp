@@ -8,7 +8,8 @@ function joinRoom({
 }) {
   dbData.joinRoom({
     roomId: room.roomId,
-    userInfo: userInfo
+    userInfo: userInfo,
+    sendData
   })
   sendData({
     type: 'joinRoom',
@@ -17,6 +18,12 @@ function joinRoom({
       host,
     }
   })
+}
+
+function sendStartGameMessage({
+  room
+}) {
+  // TODO: Generate roles and send start game event to all users
 }
 
 const room = ({
@@ -55,6 +62,8 @@ const room = ({
           host: false,
           sendData
         })
+
+        // TODO: Send join room event to all users
       } else {
         const errorMessage = `room ${roomId} doesn't exists`
         console.error(errorMessage)
@@ -80,6 +89,10 @@ const room = ({
             payload: {
               message: '有空座位没有人坐下'
             }
+          })
+        } else {
+          sendStartGameMessage({
+            room
           })
         }
       } else {
