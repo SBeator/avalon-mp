@@ -226,6 +226,23 @@ const store = new Vuex.Store({
           roomId
         }
       })
+    },
+
+    seatDown: ({
+      commit,
+      state
+    }, {
+      seatNumber,
+    }) => {
+      commit('loading')
+
+      socket.sendData({
+        type: 'seatDown',
+        state: {
+          ...state,
+          seatNumber
+        }
+      })
     }
   }
 })
