@@ -22,6 +22,8 @@ const connectSocket = (store) => {
       const data = JSON.parse(res.data)
       store.commit(data.type, data.payload)
     })
+
+    store.dispatch('initUser')
   })
 
   wx.onSocketError((error) => {

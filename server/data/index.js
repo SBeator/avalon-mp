@@ -129,7 +129,7 @@ const data = {
     // TODO: Do more thing after user is leave(E.g: remove user from seat...)
   },
 
-  generateNewRoomId: function () {
+  generateNewRoomId() {
     let roomId = Math.floor(1000 + Math.random() * 9000) + ''
 
     while (this.rooms.filter(room => room.id === roomId).length) {

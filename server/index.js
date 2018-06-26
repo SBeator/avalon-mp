@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 
 const room = require('./room')
+const user = require('./user')
 
 // you'll probably load configuration from config
 const cfg = {
@@ -49,10 +50,16 @@ wss.on('connection', function (client) {
 
   client.on('message', function (message) {
     console.log(`Recieved message: \n${message}`)
-    // client.send(message)
-    room({
+
+    const data = JSON.parse(message)
+
+    user({
       sendData,
-      data: JSON.parse(message)
+      data
+    })
+
+    room({
+      data
     })
   })
 })

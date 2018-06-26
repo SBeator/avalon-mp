@@ -1,4 +1,4 @@
-import md5 from 'md5'
+const md5 = require('md5')
 
 const connectedUsers = {
   sendDataMap: {
@@ -13,7 +13,7 @@ const connectedUsers = {
     user
   }) {
     const userHash = this.getUserHash(user)
-    return this.connectedUsers[userHash]
+    return this.sendDataMap[userHash]
   },
 
   setSendDataFunc({
@@ -21,30 +21,20 @@ const connectedUsers = {
     sendData
   }) {
     const userHash = this.getUserHash(user)
-    this.connectedUsers[userHash] = sendData
+    this.sendDataMap[userHash] = sendData
+
+    console.log(this.sendDataMap)
   },
 
   deleteSendDataFunc({
     user
   }) {
     const userHash = this.getUserHash(user)
-    delete this.connectedUsers[userHash]
+    delete this.sendDataMap[userHash]
   }
 }
 
-export const getSendDataFunc = connectedUsers.getSendDataFunc.bind(connectedUsers)
-export const setSendDataFunc = connectedUsers.setSendDataFunc.bind(connectedUsers)
-
-export default ({
-  sendData,
-  data
-}) => {
-  if (data.type === 'initUser') {
-    const user = data.state.userInfo
-
-    setSendDataFunc({
-      sendData,
-      user
-    })
-  }
+module.exports = {
+  getSendDataFunc: connectedUsers.getSendDataFunc.bind(connectedUsers),
+  setSendDataFunc: connectedUsers.setSendDataFunc.bind(connectedUsers)
 }

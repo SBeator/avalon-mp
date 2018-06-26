@@ -177,6 +177,15 @@ const store = new Vuex.Store({
   },
 
   actions: {
+    initUser: ({
+      state
+    }) => {
+      socket.sendData({
+        type: 'initUser',
+        state
+      })
+    },
+
     startGame: ({
       commit,
       state
