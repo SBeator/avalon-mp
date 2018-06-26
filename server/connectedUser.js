@@ -2,7 +2,7 @@ const md5 = require('md5')
 
 const connectedUsers = {
   sendDataMap: {
-    'xxxx': () => {}
+    'xxxx': 'client'
   },
 
   getUserHash(user) {
@@ -13,15 +13,31 @@ const connectedUsers = {
     user
   }) {
     const userHash = this.getUserHash(user)
-    return this.sendDataMap[userHash]
+    const client = this.sendDataMap[userHash]
+
+    let sendData = null
+
+    if (client) {
+      if (client.readyState === client.OPEN) {
+        sendData = (data) => {
+          const message = JSON.stringify(data)
+          console.log(`Send message: \n${message}`)
+          client.send(message)
+        }
+      } else {
+        delete this.sendDataMap[userHash]
+      }
+    }
+
+    return sendData
   },
 
-  setSendDataFunc({
+  setUserClient({
     user,
-    sendData
+    client
   }) {
     const userHash = this.getUserHash(user)
-    this.sendDataMap[userHash] = sendData
+    this.sendDataMap[userHash] = client
 
     console.log(this.sendDataMap)
   },
@@ -36,5 +52,5 @@ const connectedUsers = {
 
 module.exports = {
   getSendDataFunc: connectedUsers.getSendDataFunc.bind(connectedUsers),
-  setSendDataFunc: connectedUsers.setSendDataFunc.bind(connectedUsers)
+  setUserClient: connectedUsers.setUserClient.bind(connectedUsers),
 }

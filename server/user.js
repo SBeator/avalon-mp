@@ -1,14 +1,14 @@
-const setSendDataFunc = require('./connectedUser').setSendDataFunc
+const setUserClient = require('./connectedUser').setUserClient
 
 module.exports = ({
-  sendData,
+  client,
   data
 }) => {
   if (data.type === 'initUser') {
     const user = data.state.userInfo
 
-    setSendDataFunc({
-      sendData,
+    setUserClient({
+      client,
       user
     })
   }

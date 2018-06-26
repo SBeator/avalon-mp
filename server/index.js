@@ -42,20 +42,14 @@ const wss = new WebSocketServer({
 wss.on('connection', function (client) {
   console.log('connected')
 
-  const sendData = (data) => {
-    const message = JSON.stringify(data)
-    console.log(`Send message: \n${message}`)
-    client.send(message)
-  }
-
   client.on('message', function (message) {
     console.log(`Recieved message: \n${message}`)
 
     const data = JSON.parse(message)
 
     user({
-      sendData,
-      data
+      data,
+      client
     })
 
     room({
