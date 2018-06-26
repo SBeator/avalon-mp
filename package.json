@@ -13,6 +13,7 @@
     "server": "nodemon ./server --watch server"
   },
   "dependencies": {
+    "md5": "^2.2.1",
     "mpvue": "^1.0.10",
     "nodemon": "^1.17.5",
     "npm-run-all": "^4.1.3",
