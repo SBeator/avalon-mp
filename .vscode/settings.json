@@ -1,3 +1,6 @@
 {
-  "prettier.semi": false
+  "prettier.semi": false,
+    "[javascript]": {
+        "editor.formatOnSave": true
+    },
 }
