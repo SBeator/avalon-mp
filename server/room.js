@@ -1,4 +1,5 @@
-var dbData = require('./data')
+const dbData = require('./data')
+const getSendDataFunc = require('./connectedUser').getSendDataFunc
 
 function joinRoom({
   room,
@@ -27,11 +28,14 @@ function sendStartGameMessage({
 }
 
 const room = ({
-  data,
-  sendData
+  data
 }) => {
   let gameType, roomId, room
   const userInfo = data.state.userInfo
+  const sendData = getSendDataFunc({
+    user: userInfo
+  })
+
   switch (data.type) {
     case 'createRoom':
       gameType = data.state.gameType
