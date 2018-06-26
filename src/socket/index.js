@@ -23,7 +23,7 @@ const connectSocket = (store) => {
       store.commit(data.type, data.payload)
     })
 
-    store.dispatch('initUser')
+    store.dispatch('socketConnected')
   })
 
   wx.onSocketError((error) => {

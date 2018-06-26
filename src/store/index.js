@@ -178,12 +178,30 @@ const store = new Vuex.Store({
 
   actions: {
     initUser: ({
+      commit,
       state
+    }, {
+      userInfo
     }) => {
+      commit('updateUserInfo', {
+        userInfo
+      })
       socket.sendData({
         type: 'initUser',
         state
       })
+    },
+
+    socketConnected: ({
+      commit,
+      state
+    }) => {
+      if (state.userInfo.avatarUrl) {
+        socket.sendData({
+          type: 'initUser',
+          state
+        })
+      }
     },
 
     startGame: ({

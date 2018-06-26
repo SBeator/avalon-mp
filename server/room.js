@@ -10,7 +10,6 @@ function joinRoom({
   dbData.joinRoom({
     roomId: room.roomId,
     userInfo: userInfo,
-    sendData
   })
   sendData({
     type: 'joinRoom',

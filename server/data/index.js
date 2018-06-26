@@ -81,17 +81,13 @@ const data = {
 
   joinRoom({
     roomId,
-    userInfo,
-    sendData
+    userInfo
   }) {
     this.rooms.forEach(room => {
       if (room.users.filter(user => user.nickName === userInfo.nickName && user.avatarUrl === userInfo.avatarUrl).length) {
         this.leaveRoom({
           roomId: room.roomId,
-          userInfo: {
-            ...userInfo,
-            sendData
-          }
+          userInfo
         })
       }
     })
@@ -101,10 +97,7 @@ const data = {
     })
 
     if (room) {
-      room.users.push({
-        ...userInfo,
-        sendData
-      })
+      room.users.push(userInfo)
     }
   },
 

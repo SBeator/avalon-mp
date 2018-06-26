@@ -26,7 +26,7 @@ export default {
           wx.getUserInfo({
             success: res => {
               wx.setStorageSync('userInfo', res.userInfo)
-              store.commit('updateUserInfo', {
+              store.dispatch('initUser', {
                 userInfo: res.userInfo,
               })
             },
