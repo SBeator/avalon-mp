@@ -53,4 +53,5 @@ const connectedUsers = {
 module.exports = {
   getSendDataFunc: connectedUsers.getSendDataFunc.bind(connectedUsers),
   setUserClient: connectedUsers.setUserClient.bind(connectedUsers),
+  getUserHash: connectedUsers.getUserHash.bind(connectedUsers),
 }

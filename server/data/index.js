@@ -1,3 +1,5 @@
+const getUserHash = require('./connectedUser').getUserHash
+
 const mockSeats = new Array(9).fill({})
 mockSeats[3] = {
   avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIeUlHUuMJguQsZF3933j16D7IToLt3dnhS8gyliaPVpfMfCmJeXbZVPr7OUofQS9uNPKrkBLW8Zrg/132',
@@ -81,7 +83,8 @@ const data = {
 
   joinRoom({
     roomId,
-    userInfo
+    userInfo,
+    host
   }) {
     this.rooms.forEach(room => {
       if (room.users.filter(user => user.nickName === userInfo.nickName && user.avatarUrl === userInfo.avatarUrl).length) {
@@ -98,6 +101,10 @@ const data = {
 
     if (room) {
       room.users.push(userInfo)
+
+      if (host) {
+        room.host = getUserHash(userInfo)
+      }
     }
   },
 
