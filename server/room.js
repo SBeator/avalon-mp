@@ -106,6 +106,9 @@ const room = ({
         })
       }
       break
+    case 'seatDown':
+
+      break
     default:
       break
   }
