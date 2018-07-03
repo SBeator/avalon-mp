@@ -115,12 +115,11 @@ const room = ({
         seatNumber
       })
 
-      if (result === true) {
+      if (typeof result !== 'string') {
         sendData({
           type: 'seatDown',
           payload: {
-            seatNumber,
-            userInfo
+            seatDatas: result
           }
         })
       } else {

@@ -127,35 +127,8 @@ const store = new Vuex.Store({
     },
 
     seatDown: function (state, {
-      seatNumber,
-      userInfo
+      seatDatas
     }) {
-      const userSeatNumber = seatNumber
-      const {
-        userSeatNumber: previousSeat,
-        seatDatas
-      } = state
-
-      if (seatDatas[userSeatNumber] && seatDatas[userSeatNumber].avatarUrl) {
-        return
-      }
-
-      if (!userInfo) {
-        userInfo = state.userInfo
-
-        if (previousSeat >= 0) {
-          this.commit('leaveSeat', {
-            seatNumber: previousSeat
-          })
-        }
-
-        state.userSeatNumber = userSeatNumber
-      }
-
-      Vue.set(seatDatas, userSeatNumber, {
-        avatarUrl: userInfo.avatarUrl
-      })
-
       state.seatDatas = seatDatas
 
       if (seatDatas.filter(data => !data.avatarUrl).length) {

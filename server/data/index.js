@@ -151,9 +151,14 @@ const data = {
       return 'There is other user in the seat'
     }
 
+    const userPreviouseSeat = room.seatDatas.findIndex(user => getUserHash(user) === userHash)
+    if (userPreviouseSeat >= 0) {
+      room.seatDatas[userPreviouseSeat] = {}
+    }
+
     room.seatDatas[seatNumber] = userInfo
 
-    return true
+    return room.seatDatas
   },
 
   generateNewRoomId() {
