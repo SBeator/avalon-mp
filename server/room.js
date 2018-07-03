@@ -1,5 +1,21 @@
 const dbData = require('./data')
 const getSendDataFunc = require('./connectedUser').getSendDataFunc
+const generateRoles = require('./roles').generateRoles
+
+for (let i = 0; i < 10; i++) {
+  console.log('-------------------')
+  console.log(generateRoles({
+    gameType: {
+      playerNumber: 12,
+      hasMerlin: true,
+      hasAssassin: true,
+      hasPercival: true,
+      hasMorgana: true,
+      hasMordred: true,
+      hasOberon: true,
+    }
+  }))
+}
 
 function joinRoom({
   room,
@@ -22,10 +38,9 @@ function joinRoom({
 }
 
 function sendStartGameMessage({
-  room
-}) {
-  // TODO: Generate roles and send start game event to all users
-}
+  room,
+  gameType
+}) {}
 
 const room = ({
   data
@@ -93,8 +108,10 @@ const room = ({
             }
           })
         } else {
+          gameType = data.state.gameType
           sendStartGameMessage({
-            room
+            room,
+            gameType
           })
         }
       } else {
