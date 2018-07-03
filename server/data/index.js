@@ -1,4 +1,4 @@
-const getUserHash = require('./connectedUser').getUserHash
+const getUserHash = require('../connectedUser').getUserHash
 
 const mockSeats = new Array(9).fill({})
 mockSeats[3] = {
@@ -127,6 +127,33 @@ const data = {
     }
 
     // TODO: Do more thing after user is leave(E.g: remove user from seat...)
+  },
+
+  seatDown({
+    roomId,
+    userInfo,
+    seatNumber
+  }) {
+    const room = this.findRoom({
+      roomId
+    })
+
+    if (!room) {
+      return 'Room not exist'
+    }
+
+    const userHash = getUserHash(userInfo)
+    if (room.users.filter(user => getUserHash(user) === userHash).length <= 0) {
+      return 'User not in the room'
+    }
+
+    if (room.seatDatas[seatNumber] && room.seatDatas[seatNumber].avatarUrl) {
+      return 'There is other user in the seat'
+    }
+
+    room.seatDatas[seatNumber] = userInfo
+
+    return true
   },
 
   generateNewRoomId() {

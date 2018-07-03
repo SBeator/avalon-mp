@@ -107,6 +107,31 @@ const room = ({
       }
       break
     case 'seatDown':
+      const seatNumber = data.state.seatNumber
+      const result = dbData.seatDown({
+        roomId,
+        userInfo,
+        seatNumber
+      })
+
+      if (result === true) {
+        sendData({
+          type: 'seatDown',
+          payload: {
+            seatNumber,
+            userInfo
+          }
+        })
+      } else {
+        console.error(result)
+
+        sendData({
+          type: 'error',
+          payload: {
+            message: result
+          }
+        })
+      }
 
       break
     default:
