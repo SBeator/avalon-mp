@@ -1,7 +1,7 @@
 <template>
   <div class="seat" @tap="handleViewTap">
     <p class="seat-number">{{ num + 1 }}</p>
-    <img class="seat-avatar" :src="avatarUrl" background-size="cover"/>
+    <img class="seat-avatar" :src="avatarUrl" background-size="cover" />
   </div>
 </template>
 <script>
@@ -20,7 +20,7 @@ export default {
   methods: {
     handleViewTap() {
       this.$emit('seatDown', this.num)
-      store.commit('seatDown', { seatNumber: this.num })
+      store.dispatch('seatDown', { seatNumber: this.num })
     },
   },
 }

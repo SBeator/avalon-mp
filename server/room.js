@@ -108,6 +108,7 @@ const room = ({
       break
     case 'seatDown':
       const seatNumber = data.state.seatNumber
+      roomId = data.state.roomId
       const result = dbData.seatDown({
         roomId,
         userInfo,
