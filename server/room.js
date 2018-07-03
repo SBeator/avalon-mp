@@ -32,7 +32,7 @@ const room = ({
 }) => {
   let gameType, roomId, room
   const userInfo = data.state.userInfo
-  const sendData = getSendDataFunc({
+  let sendData = getSendDataFunc({
     user: userInfo
   })
 
@@ -116,12 +116,33 @@ const room = ({
       })
 
       if (typeof result !== 'string') {
-        sendData({
-          type: 'seatDown',
-          payload: {
-            seatDatas: result
-          }
+        const users = dbData.getUsers({
+          roomId
         })
+
+        if (typeof result !== 'string') {
+          users.forEach(user => {
+            sendData = getSendDataFunc({
+              user: userInfo
+            })
+            sendData({
+              type: 'seatDown',
+              payload: {
+                seatDatas: result
+              }
+            })
+          })
+        } else {
+          console.error(result)
+          sendData({
+            type: 'error',
+            payload: {
+              message: result
+            }
+          })
+        }
+
+        // 给所有user发送信息
       } else {
         console.error(result)
 

@@ -2,7 +2,7 @@ const md5 = require('md5')
 
 const connectedUsers = {
   sendDataMap: {
-    'xxxx': 'client'
+    'xxxx': ''
   },
 
   getUserHash(user) {

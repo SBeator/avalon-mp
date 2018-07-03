@@ -161,6 +161,20 @@ const data = {
     return room.seatDatas
   },
 
+  getUsers({
+    roomId
+  }) {
+    const room = this.findRoom({
+      roomId
+    })
+
+    if (!room) {
+      return 'Room not exist'
+    }
+
+    return room.users
+  },
+
   generateNewRoomId() {
     let roomId = Math.floor(1000 + Math.random() * 9000) + ''
 
