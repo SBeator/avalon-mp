@@ -10,6 +10,7 @@
 import store, { STATUS } from '@/store'
 
 const gameMessageMap = {
+  [STATUS.LOADING]: '加载中……',
   [STATUS.IDLE]: '请点击座位坐下',
   [STATUS.SEATED_DOWN]: '请等待其他玩家坐下',
   [STATUS.READY]: '请等待主机玩家开始游戏',
