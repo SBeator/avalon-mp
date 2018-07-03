@@ -125,12 +125,13 @@ const room = ({
       } else {
         console.error(result)
 
-        sendData({
-          type: 'error',
-          payload: {
-            message: result
-          }
-        })
+        // Maybe don't need to send the error to MP
+        // sendData({
+        //   type: 'error',
+        //   payload: {
+        //     message: result
+        //   }
+        // })
       }
 
       break
