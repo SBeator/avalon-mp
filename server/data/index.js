@@ -139,16 +139,22 @@ const data = {
     })
 
     if (!room) {
-      return 'Room not exist'
+      return {
+        error: 'Room not exist'
+      }
     }
 
     const userHash = getUserHash(userInfo)
     if (room.users.filter(user => getUserHash(user) === userHash).length <= 0) {
-      return 'User not in the room'
+      return {
+        error: 'User not in the room'
+      }
     }
 
     if (room.seatDatas[seatNumber] && room.seatDatas[seatNumber].avatarUrl) {
-      return 'There is other user in the seat'
+      return {
+        error: 'There is other user in the seat'
+      }
     }
 
     const userPreviouseSeat = room.seatDatas.findIndex(user => getUserHash(user) === userHash)
@@ -158,7 +164,9 @@ const data = {
 
     room.seatDatas[seatNumber] = userInfo
 
-    return room.seatDatas
+    return {
+      seatDatas: room.seatDatas
+    }
   },
 
   getUsers({
@@ -169,10 +177,14 @@ const data = {
     })
 
     if (!room) {
-      return 'Room not exist'
+      return {
+        error: 'Room not exist'
+      }
     }
 
-    return room.users
+    return {
+      users: room.users
+    }
   },
 
   generateNewRoomId() {

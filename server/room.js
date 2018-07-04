@@ -126,44 +126,52 @@ const room = ({
     case 'seatDown':
       const seatNumber = data.state.seatNumber
       roomId = data.state.roomId
-      const result = dbData.seatDown({
+      const {
+        seatDatas
+      } = dbData.seatDown({
         roomId,
         userInfo,
         seatNumber
       })
 
-      if (typeof result !== 'string') {
-        const users = dbData.getUsers({
+      if (seatDatas) {
+        const {
+          users,
+          error
+        } = dbData.getUsers({
           roomId
         })
 
-        if (typeof result !== 'string') {
+        if (users) {
           users.forEach(user => {
             sendData = getSendDataFunc({
               user: userInfo
             })
-            sendData({
-              type: 'seatDown',
-              payload: {
-                seatDatas: result
-              }
-            })
+
+            if (sendData) {
+              sendData({
+                type: 'seatDown',
+                payload: {
+                  seatDatas
+                }
+              })
+            }
           })
         } else {
-          console.error(result)
+          console.error(error)
           sendData({
             type: 'error',
             payload: {
-              message: result
+              message: error
             }
           })
         }
 
         // 给所有user发送信息
       } else {
-        console.error(result)
 
         // Maybe don't need to send the error to MP
+        // console.error(result)
         // sendData({
         //   type: 'error',
         //   payload: {
